@@ -464,7 +464,7 @@ export default function Home() {
         <footer className="bg-slate-900 text-slate-400 py-12">
           <div className="max-w-6xl mx-auto px-6 flex flex-col items-center gap-6 text-sm">
             <a
-              href="hhttps://www.instagram.com/gavin4smob/"
+              href="https://www.instagram.com/gavin4smob/"
               target="_blank"
               rel="noopener noreferrer"
               className="group flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-fuchsia-600 via-pink-600 to-amber-500 text-white font-bold hover:scale-105 transition-transform shadow-lg"
