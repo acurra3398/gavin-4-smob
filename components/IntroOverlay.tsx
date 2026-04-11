@@ -1,31 +1,46 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 
 export function IntroOverlay() {
   const [progress, setProgress] = useState(0);
+  const [dismissed, setDismissed] = useState(false);
 
   useEffect(() => {
+    if (dismissed) return;
     const onScroll = () => {
       const h = window.innerHeight;
       const p = Math.min(1, Math.max(0, window.scrollY / h));
       setProgress(p);
+      if (p >= 1) setDismissed(true);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [dismissed]);
+
+  // When dismissed, the 100vh spacer is removed — snap scroll to 0
+  // so the user lands at the top of the real content without a jump,
+  // and can never scroll back up to the intro.
+  useLayoutEffect(() => {
+    if (dismissed) window.scrollTo(0, 0);
+  }, [dismissed]);
+
+  if (dismissed) return null;
 
   const translate = `translateY(-${progress * 100}%)`;
   const opacity = 1 - progress * 1.2;
   const scale = 1 - progress * 0.15;
 
   return (
-    <div
-      aria-hidden={progress >= 1}
-      className="fixed inset-0 z-[100] pointer-events-none flex items-center justify-center bg-gradient-to-br from-[#0b1e4d] via-[#1e3a8a] to-[#3b1d6b] overflow-hidden"
-      style={{ transform: translate, willChange: "transform" }}
-    >
+    <>
+      {/* Spacer gives scroll room for the intro. Removed with the overlay. */}
+      <div style={{ height: "100vh" }} aria-hidden />
+      <div
+        aria-hidden={progress >= 1}
+        className="fixed inset-0 z-[100] pointer-events-none flex items-center justify-center bg-gradient-to-br from-[#0b1e4d] via-[#1e3a8a] to-[#3b1d6b] overflow-hidden"
+        style={{ transform: translate, willChange: "transform" }}
+      >
       {/* Animated blobs */}
       <div className="absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full bg-amber-400/20 blur-3xl animate-blob" />
       <div className="absolute -bottom-40 -right-40 w-[500px] h-[500px] rounded-full bg-blue-400/20 blur-3xl animate-blob animation-delay-2000" />
@@ -69,5 +84,6 @@ export function IntroOverlay() {
         </div>
       </div>
     </div>
+    </>
   );
 }

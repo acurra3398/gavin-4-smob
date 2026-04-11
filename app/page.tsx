@@ -110,8 +110,6 @@ export default function Home() {
   return (
     <>
       <IntroOverlay />
-      {/* Spacer so the intro has room to scroll away */}
-      <div className="intro-spacer" aria-hidden />
 
       <main id="top" className="relative z-10 bg-white">
         {/* Top announcement bar */}
