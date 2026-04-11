@@ -106,6 +106,51 @@ const experience = [
   },
 ];
 
+// Campaign timeline — edit dates/status freely. Status: "done" | "current" | "upcoming"
+const timeline: {
+  date: string;
+  title: string;
+  body: string;
+  status: "done" | "current" | "upcoming";
+}[] = [
+  {
+    date: "December 19, 2025",
+    title: "Applications Open",
+    body: "The HCPSS SMOB application window opens to all eligible students.",
+    status: "done",
+  },
+  {
+    date: "January 24, 2026",
+    title: "Applications Due",
+    body: "Gavin submitted his application to be the 2026–27 Student Member of the Board.",
+    status: "done",
+  },
+  {
+    date: "March 25, 2026",
+    title: "SMOB Convention",
+    body: "Student delegates vote at the SMOB Convention to select the finalists.",
+    status: "done",
+  },
+  {
+    date: "March 27, 2026",
+    title: "Finalists Announced",
+    body: "Gavin is officially named one of the HCPSS SMOB finalists.",
+    status: "current",
+  },
+  {
+    date: "April 29, 2026",
+    title: "Voting Day",
+    body: "Every HCPSS secondary student gets a vote. Make yours count.",
+    status: "upcoming",
+  },
+  {
+    date: "???",
+    title: "Sworn In",
+    body: "The new Student Member of the Board begins the term.",
+    status: "upcoming",
+  },
+];
+
 export default function Home() {
   return (
     <>
@@ -397,6 +442,136 @@ export default function Home() {
               </div>
             </div>
           </Reveal>
+        </section>
+
+        {/* Timeline */}
+        <section id="timeline" className="relative overflow-hidden bg-gradient-to-b from-slate-50 to-white py-20">
+          <div className="max-w-5xl mx-auto px-6">
+            <Reveal>
+              <div className="text-center mb-16">
+                <h2 className="text-sm font-bold uppercase tracking-widest text-[color:var(--brand)]">
+                  Timeline
+                </h2>
+                <h3 className="text-4xl md:text-5xl font-bold mt-2">
+                  The Road to SMOB
+                </h3>
+                <p className="mt-4 text-slate-500 max-w-xl mx-auto">
+                  Here&apos;s where we are and what&apos;s coming up next.
+                </p>
+              </div>
+            </Reveal>
+
+            <div className="relative">
+              {/* Vertical line — animated flowing gradient */}
+              <div
+                className="timeline-spine absolute left-4 md:left-1/2 top-0 bottom-0 w-1 md:-translate-x-1/2 rounded-full shadow-[0_0_12px_rgba(251,191,36,0.4)]"
+                aria-hidden
+              />
+
+              <div className="space-y-10 md:space-y-14">
+                {timeline.map((t, i) => {
+                  const reverse = i % 2 === 1;
+                  const isDone = t.status === "done";
+                  const isCurrent = t.status === "current";
+
+                  const nodeClass = isCurrent
+                    ? "bg-amber-400 ring-4 ring-amber-200"
+                    : isDone
+                    ? "bg-emerald-500 ring-4 ring-emerald-100"
+                    : "bg-white border-2 border-slate-300";
+
+                  const badgeClass = isCurrent
+                    ? "bg-amber-100 text-amber-800 border-amber-300"
+                    : isDone
+                    ? "bg-emerald-100 text-emerald-800 border-emerald-300"
+                    : "bg-slate-100 text-slate-600 border-slate-200";
+
+                  const statusLabel = isCurrent
+                    ? "Happening now"
+                    : isDone
+                    ? "Completed"
+                    : "Upcoming";
+
+                  return (
+                    <Reveal
+                      key={t.title + i}
+                      direction={reverse ? "right" : "left"}
+                      delay={i * 80}
+                    >
+                      <div
+                        className={`relative flex items-start md:items-center gap-6 md:gap-0 ${
+                          reverse ? "md:flex-row-reverse" : "md:flex-row"
+                        }`}
+                      >
+                        {/* Card */}
+                        <div
+                          className={`flex-1 pl-14 md:pl-0 ${
+                            reverse ? "md:pl-12" : "md:pr-12"
+                          } ${reverse ? "md:text-left" : "md:text-right"}`}
+                        >
+                          <div
+                            className={`inline-block bg-white rounded-2xl p-5 md:p-6 shadow-md border border-slate-100 hover-lift text-left ${
+                              isCurrent ? "ring-2 ring-amber-300 animate-pulse-glow" : ""
+                            }`}
+                          >
+                            <span
+                              className={`inline-block text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full border mb-2 ${badgeClass}`}
+                            >
+                              {statusLabel}
+                            </span>
+                            <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+                              {t.date}
+                            </p>
+                            <h4 className="text-lg md:text-xl font-bold mt-1 text-slate-900">
+                              {t.title}
+                            </h4>
+                            <p className="mt-2 text-sm text-slate-600 leading-relaxed">
+                              {t.body}
+                            </p>
+                          </div>
+                        </div>
+
+                        {/* Node on the line */}
+                        <div
+                          className="absolute left-4 md:left-1/2 md:-translate-x-1/2 top-4 md:top-1/2 md:-translate-y-1/2 animate-node-pop"
+                          style={{ animationDelay: `${i * 120 + 200}ms` }}
+                        >
+                          <div
+                            className={`relative w-6 h-6 rounded-full ${nodeClass} shadow-lg transition-transform hover:scale-125`}
+                          >
+                            {isCurrent && (
+                              <span
+                                className="absolute inset-0 rounded-full bg-amber-400 animate-ping opacity-75"
+                                aria-hidden
+                              />
+                            )}
+                            {isDone && (
+                              <svg
+                                className="absolute inset-0 m-auto w-3 h-3 text-white"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={3}
+                                  d="M5 13l4 4L19 7"
+                                />
+                              </svg>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Opposite-side spacer (desktop) */}
+                        <div className="hidden md:block flex-1" aria-hidden />
+                      </div>
+                    </Reveal>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
         </section>
 
         {/* Experience */}

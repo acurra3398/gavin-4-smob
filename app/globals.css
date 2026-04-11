@@ -130,6 +130,33 @@ body {
   transform: perspective(800px) rotateX(4deg) rotateY(-4deg) scale(1.02);
 }
 
+/* Timeline spine flow — gradient travels downward */
+@keyframes flow-down {
+  0% { background-position: 50% 0%; }
+  100% { background-position: 50% 200%; }
+}
+.timeline-spine {
+  background: linear-gradient(
+    to bottom,
+    #10b981 0%,
+    #10b981 20%,
+    #fbbf24 40%,
+    #fbbf24 60%,
+    #e2e8f0 80%,
+    #e2e8f0 100%
+  );
+  background-size: 100% 200%;
+  animation: flow-down 6s linear infinite;
+}
+
+/* Timeline node pop-in */
+@keyframes node-pop {
+  0% { transform: scale(0); opacity: 0; }
+  60% { transform: scale(1.25); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.animate-node-pop { animation: node-pop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+
 /* Pulse glow */
 @keyframes pulse-glow {
   0%, 100% { box-shadow: 0 0 20px rgba(251, 191, 36, 0.3); }
