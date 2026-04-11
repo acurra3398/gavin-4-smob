@@ -142,7 +142,7 @@ const timeline: {
   {
     date: "April 29, 2026",
     title: "Voting Day",
-    body: "Every HCPSS secondary student gets a vote. Make yours count.",
+    body: "Every HCPSS middle & high school student gets a vote. Make yours count.",
     status: "upcoming",
   },
   {
@@ -158,7 +158,7 @@ export default function Home() {
     <>
       <IntroOverlay />
 
-      <main id="top" className="relative z-10 bg-white">
+      <main id="top" className="relative z-10 bg-white dark:bg-slate-950 transition-colors">
         {/* Top announcement bar */}
         <div className="relative bg-gradient-to-r from-amber-400 via-amber-300 to-amber-400 text-slate-900 py-2.5 text-center text-sm md:text-base font-bold overflow-hidden animate-gradient">
           <Confetti />
@@ -174,7 +174,7 @@ export default function Home() {
         <Nav />
 
         {/* Hero */}
-        <section className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-amber-50 animate-gradient">
+        <section className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-amber-50 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 animate-gradient">
           {/* Floating particles */}
           <div className="absolute inset-0 pointer-events-none" aria-hidden>
             {[
@@ -204,28 +204,28 @@ export default function Home() {
           </div>
           <div className="relative max-w-6xl mx-auto px-6 py-20 md:py-28 grid md:grid-cols-2 gap-12 items-center">
             <Reveal direction="left">
-              <span className="inline-block bg-amber-200 text-amber-900 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-6 animate-pulse-glow">
+              <span className="inline-block bg-amber-200 text-amber-900 dark:bg-amber-400/20 dark:text-amber-300 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-6 animate-pulse-glow">
                 ⭐ HCPSS SMOB Finalist
               </span>
-              <h1 className="text-5xl md:text-6xl font-black tracking-tight text-slate-900 leading-tight">
+              <h1 className="text-5xl md:text-6xl font-black tracking-tight text-slate-900 dark:text-white leading-tight">
                 Gavin Falcón
-                <span className="block bg-gradient-to-r from-[color:var(--brand)] to-purple-600 bg-clip-text text-transparent">
+                <span className="block bg-gradient-to-r from-[color:var(--brand)] to-purple-600 dark:to-fuchsia-400 bg-clip-text text-transparent">
                   for SMOB
                 </span>
               </h1>
-              <p className="mt-6 text-lg text-slate-600 max-w-xl">
+              <p className="mt-6 text-lg text-slate-600 dark:text-slate-300 max-w-xl">
                 My campaign is about voice, because your voice is the only one that should matter.
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <a
                   href="#platform"
-                  className="bg-[color:var(--brand)] text-white px-6 py-3 rounded-full font-semibold hover:opacity-90 hover:scale-105 transition"
+                  className="bg-[color:var(--brand)] text-white dark:text-slate-900 px-6 py-3 rounded-full font-semibold hover:opacity-90 hover:scale-105 transition"
                 >
                   Read the Platform
                 </a>
                 <a
                   href="#get-involved"
-                  className="border-2 border-slate-300 px-6 py-3 rounded-full font-semibold hover:border-slate-500 hover:scale-105 transition"
+                  className="border-2 border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 px-6 py-3 rounded-full font-semibold hover:border-slate-500 dark:hover:border-slate-500 hover:scale-105 transition"
                 >
                   Get Involved
                 </a>
@@ -267,13 +267,13 @@ export default function Home() {
               <h2 className="text-sm font-bold uppercase tracking-widest text-[color:var(--brand)]">
                 About Gavin
               </h2>
-              <h3 className="text-4xl font-bold mt-2 mb-6">
+              <h3 className="text-4xl font-bold mt-2 mb-6 text-slate-900 dark:text-white">
                 Meet Gavin
               </h3>
-              <p className="text-slate-600 leading-relaxed mb-4">
+              <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
                 Gavin is the 25-26 HCASC President. He's advocated county and state wide. No matter if he is at a HCASC general assembly, or is in annapolis he knows how to make an impact.
               </p>
-              <p className="text-slate-600 leading-relaxed">
+              <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
                 Gavin is also the vice president at Long Reach High school. On the side he enjoys Okinawa Shorin-Ryu Kiyobukan.
               </p>
             </Reveal>
@@ -281,17 +281,17 @@ export default function Home() {
         </section>
 
         {/* Platform */}
-        <section id="platform" className="bg-slate-50 py-20">
+        <section id="platform" className="bg-slate-50 dark:bg-slate-900 py-20">
           <div className="max-w-6xl mx-auto px-6">
             <Reveal>
               <div className="text-center mb-16">
                 <h2 className="text-sm font-bold uppercase tracking-widest text-[color:var(--brand)]">
                   Platform
                 </h2>
-                <h3 className="text-4xl md:text-5xl font-bold mt-2">
+                <h3 className="text-4xl md:text-5xl font-bold mt-2 text-slate-900 dark:text-white">
                   What We Stand For
                 </h3>
-                <p className="mt-4 text-slate-500 max-w-xl mx-auto">
+                <p className="mt-4 text-slate-500 dark:text-slate-400 max-w-xl mx-auto">
                   Every student deserves a{" "}
                   <span className="font-bold text-[color:var(--brand)]">V.O.I.C.E.</span>
                 </p>
@@ -397,12 +397,12 @@ export default function Home() {
 
                         {/* Content */}
                         <div className="w-full md:w-1/2">
-                          <div className="bg-white rounded-2xl p-6 md:p-8 shadow-lg border border-slate-100">
+                          <div className="bg-white dark:bg-slate-800/70 dark:backdrop-blur rounded-2xl p-6 md:p-8 shadow-lg border border-slate-100 dark:border-slate-700">
                             <ul className="space-y-3">
                               {v.points.map((pt) => (
                                 <li
                                   key={pt}
-                                  className="flex items-start gap-3 text-slate-700"
+                                  className="flex items-start gap-3 text-slate-700 dark:text-slate-300"
                                 >
                                   <span
                                     className={`mt-1 w-2 h-2 rounded-full flex-shrink-0 bg-gradient-to-br ${v.gradient}`}
@@ -468,17 +468,17 @@ export default function Home() {
         </section>
 
         {/* Timeline */}
-        <section id="timeline" className="relative overflow-hidden bg-gradient-to-b from-slate-50 to-white py-20">
+        <section id="timeline" className="relative overflow-hidden bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-950 py-20">
           <div className="max-w-5xl mx-auto px-6">
             <Reveal>
               <div className="text-center mb-16">
                 <h2 className="text-sm font-bold uppercase tracking-widest text-[color:var(--brand)]">
                   Timeline
                 </h2>
-                <h3 className="text-4xl md:text-5xl font-bold mt-2">
+                <h3 className="text-4xl md:text-5xl font-bold mt-2 text-slate-900 dark:text-white">
                   The Road to SMOB
                 </h3>
-                <p className="mt-4 text-slate-500 max-w-xl mx-auto">
+                <p className="mt-4 text-slate-500 dark:text-slate-400 max-w-xl mx-auto">
                   Here&apos;s where we are and what&apos;s coming up next.
                 </p>
               </div>
@@ -533,7 +533,7 @@ export default function Home() {
                           } ${reverse ? "md:text-left" : "md:text-right"}`}
                         >
                           <div
-                            className={`inline-block bg-white rounded-2xl p-5 md:p-6 shadow-md border border-slate-100 hover-lift text-left ${
+                            className={`inline-block bg-white dark:bg-slate-800/80 dark:backdrop-blur rounded-2xl p-5 md:p-6 shadow-md border border-slate-100 dark:border-slate-700 hover-lift text-left ${
                               isCurrent ? "ring-2 ring-amber-300 animate-pulse-glow" : ""
                             }`}
                           >
@@ -542,13 +542,13 @@ export default function Home() {
                             >
                               {statusLabel}
                             </span>
-                            <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+                            <p className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                               {t.date}
                             </p>
-                            <h4 className="text-lg md:text-xl font-bold mt-1 text-slate-900">
+                            <h4 className="text-lg md:text-xl font-bold mt-1 text-slate-900 dark:text-white">
                               {t.title}
                             </h4>
-                            <p className="mt-2 text-sm text-slate-600 leading-relaxed">
+                            <p className="mt-2 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                               {t.body}
                             </p>
                           </div>
@@ -604,21 +604,23 @@ export default function Home() {
               <h2 className="text-sm font-bold uppercase tracking-widest text-[color:var(--brand)]">
                 Experience
               </h2>
-              <h3 className="text-4xl font-bold mt-2">A Proven Track Record</h3>
+              <h3 className="text-4xl font-bold mt-2 text-slate-900 dark:text-white">
+                A Proven Track Record
+              </h3>
             </div>
           </Reveal>
           <div className="grid md:grid-cols-2 gap-6">
             {experience.map((e, i) => (
               <Reveal key={e.role} direction="up" delay={i * 100}>
-                <div className="relative p-6 rounded-2xl bg-white border border-slate-200 hover-lift h-full">
+                <div className="relative p-6 rounded-2xl bg-white dark:bg-slate-800/60 dark:backdrop-blur border border-slate-200 dark:border-slate-700 hover-lift h-full">
                   <div className="absolute top-6 left-6 w-3 h-3 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 shadow-[0_0_0_4px_rgba(251,191,36,0.15)]" />
                   <div className="pl-8">
-                    <h4 className="text-lg font-bold text-slate-900">{e.role}</h4>
+                    <h4 className="text-lg font-bold text-slate-900 dark:text-white">{e.role}</h4>
                     <ul className="mt-3 space-y-1.5">
                       {e.highlights.map((h) => (
                         <li
                           key={h}
-                          className="text-sm text-slate-600 flex gap-2 before:content-['→'] before:text-[color:var(--brand)] before:font-bold"
+                          className="text-sm text-slate-600 dark:text-slate-300 flex gap-2 before:content-['→'] before:text-[color:var(--brand)] before:font-bold"
                         >
                           {h}
                         </li>

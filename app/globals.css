@@ -1,8 +1,22 @@
 @import "tailwindcss";
 
+/*
+ * Dark mode follows the OS / browser preference automatically.
+ * Tailwind v4's default `dark:` variant uses `prefers-color-scheme: dark`,
+ * so no extra config is needed — just sprinkle `dark:` classes.
+ */
 :root {
   --brand: #1e3a8a;
   --brand-accent: #fbbf24;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --brand: #93c5fd;
+    --brand-accent: #fcd34d;
+    color-scheme: dark;
+  }
 }
 
 html {
