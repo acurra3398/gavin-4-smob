@@ -484,6 +484,17 @@ export default function Home() {
               <p className="hidden md:block">·</p>
               <p>Authorized by the Gavin Falcón campaign committee.</p>
             </div>
+            <p className="text-xs text-slate-500">
+              Created by{" "}
+              <a
+                href="https://alexcurrano.dev"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-slate-300 hover:text-amber-400 underline underline-offset-4 decoration-slate-600 hover:decoration-amber-400 transition-colors"
+              >
+                Alexander Currano
+              </a>
+            </p>
           </div>
         </footer>
       </main>
