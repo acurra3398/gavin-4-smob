@@ -230,7 +230,7 @@ export default function Home() {
               </div>
             </Reveal>
             <Reveal direction="right" delay={150}>
-              <div className="relative aspect - [3/4] w-full overflow-hidden rounded-lg">
+              <div className="relative aspect-[3/4] w-full overflow-hidden rounded-lg">
                 <Image src={"/Main.webp"} alt={"Gavin Falcón's Photo"} fill className={"object-cover"} priority/>
               </div>
             </Reveal>
@@ -241,7 +241,7 @@ export default function Home() {
         <section id="about" className="max-w-6xl mx-auto px-6 py-20">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <Reveal direction="left">
-              <div className="relative aspect - [3/4] w-full overflow-hidden rounded-lg">
+              <div className="relative aspect-[3/4] w-full overflow-hidden rounded-lg">
                 <Image src={"/Seccond.webp"} alt={"Gavin Falcón's Photo"} fill className={"object-cover"} priority/>
               </div>
             </Reveal>
