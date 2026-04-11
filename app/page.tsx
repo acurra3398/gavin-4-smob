@@ -3,6 +3,7 @@ import { Placeholder } from "@/components/Placeholder";
 import { IntroOverlay } from "@/components/IntroOverlay";
 import { Reveal } from "@/components/Reveal";
 import { PledgeButton } from "@/components/PledgeButton";
+import Image from "next/image";
 
 const voice = [
   {
@@ -229,7 +230,9 @@ export default function Home() {
               </div>
             </Reveal>
             <Reveal direction="right" delay={150}>
-              <Placeholder label="Hero Photo" aspect="portrait" />
+              <div className="relative aspect - [3/4] w-full overflow-hidden rounded-lg">
+                <Image src={"/Main.webp"} alt={"Gavin Falcón's Photo"} fill className={"object-cover"} priority/>
+              </div>
             </Reveal>
           </div>
         </section>
@@ -238,7 +241,9 @@ export default function Home() {
         <section id="about" className="max-w-6xl mx-auto px-6 py-20">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <Reveal direction="left">
-              <Placeholder label="About Photo" aspect="square" />
+              <div className="relative aspect - [3/4] w-full overflow-hidden rounded-lg">
+                <Image src={"/Seccond.webp"} alt={"Gavin Falcón's Photo"} fill className={"object-cover"} priority/>
+              </div>
             </Reveal>
             <Reveal direction="right" delay={100}>
               <h2 className="text-sm font-bold uppercase tracking-widest text-[color:var(--brand)]">
