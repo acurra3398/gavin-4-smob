@@ -1,22 +1,22 @@
 @import "tailwindcss";
 
 /*
- * Dark mode follows the OS / browser preference automatically.
- * Tailwind v4's default `dark:` variant uses `prefers-color-scheme: dark`,
- * so no extra config is needed — just sprinkle `dark:` classes.
+ * Class-based dark mode. An inline script in layout.tsx sets `.dark`
+ * on <html> from localStorage, falling back to the OS preference.
+ * Users can override via the toggle in the nav.
  */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --brand: #1e3a8a;
   --brand-accent: #fbbf24;
   color-scheme: light;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --brand: #93c5fd;
-    --brand-accent: #fcd34d;
-    color-scheme: dark;
-  }
+html.dark {
+  --brand: #93c5fd;
+  --brand-accent: #fcd34d;
+  color-scheme: dark;
 }
 
 html {
@@ -144,18 +144,29 @@ body {
   transform: perspective(800px) rotateX(4deg) rotateY(-4deg) scale(1.02);
 }
 
-/* Confetti falling pieces */
+/* Confetti falling pieces — GPU-accelerated */
 @keyframes confetti-fall {
-  0% { transform: translateY(-24px) rotate(0deg); opacity: 0; }
-  15% { opacity: 1; }
-  100% { transform: translateY(70px) rotate(720deg); opacity: 0; }
+  0% {
+    transform: translate3d(0, -28px, 0) rotate(var(--rot-start, 0deg));
+    opacity: 0;
+  }
+  12% { opacity: 1; }
+  88% { opacity: 1; }
+  100% {
+    transform: translate3d(var(--drift, 0px), 72px, 0) rotate(var(--rot-end, 720deg));
+    opacity: 0;
+  }
 }
 .confetti-piece {
   position: absolute;
   top: 0;
   border-radius: 1px;
   animation: confetti-fall linear infinite;
+  animation-timing-function: cubic-bezier(0.33, 0, 0.67, 1);
   pointer-events: none;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 /* Timeline spine flow — gradient travels downward */
