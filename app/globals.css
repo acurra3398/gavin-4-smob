@@ -10,6 +10,7 @@
 :root {
   --brand: #1e3a8a;
   --brand-accent: #fbbf24;
+  --reveal-duration: 0.9s;
   color-scheme: light;
 }
 
@@ -17,6 +18,49 @@ html.dark {
   --brand: #93c5fd;
   --brand-accent: #fcd34d;
   color-scheme: dark;
+}
+
+/* Mobile: slow entrance + continuous animations so they don't feel
+   sped up on small screens. Desktop is untouched. */
+@media (max-width: 767px) {
+  :root {
+    --reveal-duration: 1.3s;
+  }
+  .animate-blob {
+    animation-duration: 20s;
+    /* Much cheaper than blur-3xl on phones */
+    filter: blur(28px) !important;
+  }
+  .animate-shimmer { animation-duration: 4.5s; }
+  .animate-gradient { animation-duration: 16s; }
+  .animate-bounce-slow { animation-duration: 3s; }
+  .animate-marquee { animation-duration: 60s; }
+  .animate-pulse-glow { animation-duration: 3.5s; }
+  .timeline-spine { animation-duration: 10s; }
+  .animate-node-pop { animation-duration: 1s; }
+  .confetti-piece {
+    animation-duration: 4.5s !important;
+  }
+  /* Particles are pure decoration and a big perf hit on mobile — hide them */
+  .particle { display: none !important; }
+
+  /* Section vertical padding tightened for phones */
+  .mobile-section { padding-top: 4rem; padding-bottom: 4rem; }
+}
+
+/* Clickable press-down feedback on tap/click */
+.clickable {
+  transition:
+    transform 0.15s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.15s ease,
+    opacity 0.15s ease,
+    background-color 0.15s ease,
+    box-shadow 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.clickable:active {
+  transform: scale(0.94);
+  filter: brightness(0.92);
 }
 
 html {
