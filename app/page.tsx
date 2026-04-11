@@ -3,6 +3,7 @@ import { Placeholder } from "@/components/Placeholder";
 import { IntroOverlay } from "@/components/IntroOverlay";
 import { Reveal } from "@/components/Reveal";
 import { PledgeButton } from "@/components/PledgeButton";
+import { Confetti } from "@/components/Confetti";
 import Image from "next/image";
 
 const voice = [
@@ -160,7 +161,8 @@ export default function Home() {
       <main id="top" className="relative z-10 bg-white">
         {/* Top announcement bar */}
         <div className="relative bg-gradient-to-r from-amber-400 via-amber-300 to-amber-400 text-slate-900 py-2.5 text-center text-sm md:text-base font-bold overflow-hidden animate-gradient">
-          <span className="inline-flex items-center gap-2">
+          <Confetti />
+          <span className="relative inline-flex items-center gap-2">
             <span className="relative flex h-2.5 w-2.5">
               <span className="absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75 animate-ping" />
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-600" />
@@ -231,7 +233,15 @@ export default function Home() {
             </Reveal>
             <Reveal direction="right" delay={150}>
               <div className="relative aspect-[3/4] w-full overflow-hidden rounded-lg">
-                <Image src={"/Main.webp"} alt={"Gavin Falcón's Photo"} fill className={"object-cover"} priority/>
+                <Image
+                  src="/Main.webp"
+                  alt="Gavin Falcón's Photo"
+                  fill
+                  className="object-cover"
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                  quality={80}
+                  priority
+                />
               </div>
             </Reveal>
           </div>
@@ -242,7 +252,15 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <Reveal direction="left">
               <div className="relative aspect-[3/4] w-full overflow-hidden rounded-lg">
-                <Image src={"/Seccond.webp"} alt={"Gavin Falcón's Photo"} fill className={"object-cover"} priority/>
+                <Image
+                  src="/Seccond.webp"
+                  alt="Gavin Falcón's Photo"
+                  fill
+                  className="object-cover"
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                  quality={80}
+                  loading="lazy"
+                />
               </div>
             </Reveal>
             <Reveal direction="right" delay={100}>
