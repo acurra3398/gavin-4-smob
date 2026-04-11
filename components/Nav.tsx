@@ -10,7 +10,7 @@ export function Nav() {
     <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-slate-200">
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
         <a href="#top" className="font-bold text-lg text-[color:var(--brand)]">
-          [Candidate] for SMOB
+          Gavin Falcón for SMOB
         </a>
         <ul className="hidden md:flex gap-8 text-sm font-medium">
           {links.map((l) => (

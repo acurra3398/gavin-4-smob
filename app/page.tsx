@@ -39,17 +39,16 @@ export default function Home() {
           <div className="max-w-6xl mx-auto px-6 py-20 md:py-28 grid md:grid-cols-2 gap-12 items-center">
             <Reveal direction="left">
               <span className="inline-block bg-amber-200 text-amber-900 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-6">
-                Official SMOB Finalist
+                HCPSS SMOB Finalist
               </span>
               <h1 className="text-5xl md:text-6xl font-black tracking-tight text-slate-900 leading-tight">
-                [Candidate Name]
+                Gavin Falcón
                 <span className="block bg-gradient-to-r from-[color:var(--brand)] to-purple-600 bg-clip-text text-transparent">
                   for SMOB
                 </span>
               </h1>
               <p className="mt-6 text-lg text-slate-600 max-w-xl">
-                A placeholder tagline goes here. Something short, inspiring, and
-                memorable that captures the heart of the campaign.
+                My campaign is about voice, because your voice is the only one that should batter.
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <a
@@ -80,18 +79,16 @@ export default function Home() {
             </Reveal>
             <Reveal direction="right" delay={100}>
               <h2 className="text-sm font-bold uppercase tracking-widest text-[color:var(--brand)]">
-                About the Candidate
+                About Gavin
               </h2>
               <h3 className="text-4xl font-bold mt-2 mb-6">
-                Meet [Candidate Name]
+                Meet Gavin
               </h3>
               <p className="text-slate-600 leading-relaxed mb-4">
-                Placeholder bio paragraph. Describe the candidate&apos;s background,
-                school, grade, and what drew them to run for SMOB.
+                Gavin is the 25-26 HCASC President. He's advocated county and state wide. No matter if he is at a HCASC general assembly, or is in annapolis he knows how to make an impact.
               </p>
               <p className="text-slate-600 leading-relaxed">
-                A second placeholder paragraph covering extracurriculars, leadership
-                experience, and personal motivation.
+                Gavin is also the vice president at Long Reach High school. On the side he enjoys Okinawa Shorin-Ryu Kiyobukan.
               </p>
             </Reveal>
           </div>
@@ -105,7 +102,7 @@ export default function Home() {
                 <h2 className="text-sm font-bold uppercase tracking-widest text-[color:var(--brand)]">
                   Platform
                 </h2>
-                <h3 className="text-4xl font-bold mt-2">What We Stand For</h3>
+                <h3 className="text-4xl font-bold mt-2">What he Stand For</h3>
               </div>
             </Reveal>
             <div className="grid md:grid-cols-3 gap-8">
@@ -189,8 +186,8 @@ export default function Home() {
         {/* Footer */}
         <footer className="bg-slate-900 text-slate-400 py-10">
           <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between gap-4 text-sm">
-            <p>© {new Date().getFullYear()} [Candidate Name] for SMOB.</p>
-            <p>Authorized by the [Candidate Name] campaign committee.</p>
+            <p>© {new Date().getFullYear()} Gavin Falcón for SMOB.</p>
+            <p>Authorized by the Gavin Falcón campaign committee.</p>
           </div>
         </footer>
       </main>

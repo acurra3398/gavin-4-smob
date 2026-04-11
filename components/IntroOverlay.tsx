@@ -37,8 +37,16 @@ export function IntroOverlay() {
       >
         <h1 className="text-5xl md:text-8xl font-black tracking-tight text-white animate-fade-up">
           Your voice
-          <span className="block bg-gradient-to-r from-amber-300 to-amber-500 bg-clip-text text-transparent animate-shimmer">
-            matters.
+          <span className="mt-1 block">
+            <span className="relative inline-block">
+              <span className="block bg-gradient-to-r from-amber-300 to-amber-500 bg-clip-text text-transparent animate-shimmer">
+                matters.
+              </span>
+              <span
+                aria-hidden="true"
+                className="absolute left-0 right-0 -bottom-1 h-1 rounded-full bg-amber-400/90"
+              />
+            </span>
           </span>
         </h1>
         <p className="mt-8 text-white/70 text-sm uppercase tracking-[0.3em] animate-fade-up animation-delay-500">

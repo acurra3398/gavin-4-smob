@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "[Candidate Name] for SMOB — Finalist",
-  description: "Official campaign site for [Candidate Name], finalist for Student Member of the Board.",
+  title: "Gavin Falcón for SMOB — Finalist",
+  description: "Official campaign site for Gavin Falcón, finalist for Student Member of the Board.",
 };
 
 export default function RootLayout({
