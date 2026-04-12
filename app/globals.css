@@ -44,8 +44,14 @@ html.dark {
   /* Particles are pure decoration and a big perf hit on mobile — hide them */
   .particle { display: none !important; }
 
-  /* Section vertical padding tightened for phones */
-  .mobile-section { padding-top: 4rem; padding-bottom: 4rem; }
+  /* Reduce confetti count on mobile by hiding every other piece */
+  .confetti-piece:nth-child(2n) { display: none; }
+
+  /* Reduce backdrop-filter cost on mobile */
+  .voice-letter-inner div[style*="backdrop-filter"] {
+    backdrop-filter: blur(12px) saturate(140%) !important;
+    -webkit-backdrop-filter: blur(12px) saturate(140%) !important;
+  }
 }
 
 /* Clickable press-down feedback on tap/click */
@@ -191,21 +197,21 @@ body {
 /* Confetti falling pieces — GPU-accelerated */
 @keyframes confetti-fall {
   0% {
-    transform: translate3d(0, -120%, 0);
+    transform: translate3d(0, -10px, 0) rotate(0deg);
     opacity: 0;
   }
-  15% { opacity: 1; }
-  85% { opacity: 1; }
+  10% { opacity: 0.9; }
+  90% { opacity: 0.9; }
   100% {
-    transform: translate3d(var(--drift, 0px), 360%, 0);
+    transform: translate3d(var(--drift, 0px), 52px, 0) rotate(var(--rot-end, 720deg));
     opacity: 0;
   }
 }
 .confetti-piece {
   position: absolute;
   top: 0;
-  border-radius: 2px;
-  animation: confetti-fall linear infinite;
+  border-radius: 1.5px;
+  animation: confetti-fall ease-in-out infinite;
   pointer-events: none;
   will-change: transform, opacity;
   backface-visibility: hidden;

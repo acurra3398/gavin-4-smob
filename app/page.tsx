@@ -202,12 +202,12 @@ export default function Home() {
               />
             ))}
           </div>
-          <div className="relative max-w-6xl mx-auto px-6 py-20 md:py-28 grid md:grid-cols-2 gap-12 items-center">
+          <div className="relative max-w-6xl mx-auto px-4 md:px-6 py-14 md:py-28 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <Reveal direction="left">
               <span className="inline-block bg-amber-200 text-amber-900 dark:bg-amber-400/20 dark:text-amber-300 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-6 animate-pulse-glow">
                 ⭐ HCPSS SMOB Finalist
               </span>
-              <h1 className="text-5xl md:text-6xl font-black tracking-tight text-slate-900 dark:text-white leading-tight">
+              <h1 className="text-4xl md:text-6xl font-black tracking-tight text-slate-900 dark:text-white leading-tight">
                 Gavin Falcón
                 <span className="block bg-gradient-to-r from-[color:var(--brand)] to-purple-600 dark:to-fuchsia-400 bg-clip-text text-transparent">
                   for SMOB
@@ -219,13 +219,13 @@ export default function Home() {
               <div className="mt-8 flex flex-wrap gap-4">
                 <a
                   href="#platform"
-                  className="bg-[color:var(--brand)] text-white dark:text-slate-900 px-6 py-3 rounded-full font-semibold hover:opacity-90 hover:scale-105 transition"
+                  className="clickable bg-[color:var(--brand)] text-white dark:text-slate-900 px-6 py-3 rounded-full font-semibold hover:opacity-90 hover:scale-105 transition"
                 >
                   Read the Platform
                 </a>
                 <a
                   href="#get-involved"
-                  className="border-2 border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 px-6 py-3 rounded-full font-semibold hover:border-slate-500 dark:hover:border-slate-500 hover:scale-105 transition"
+                  className="clickable border-2 border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 px-6 py-3 rounded-full font-semibold hover:border-slate-500 dark:hover:border-slate-500 hover:scale-105 transition"
                 >
                   Get Involved
                 </a>
@@ -248,7 +248,7 @@ export default function Home() {
         </section>
 
         {/* About */}
-        <section id="about" className="max-w-6xl mx-auto px-6 py-20">
+        <section id="about" className="max-w-6xl mx-auto px-4 md:px-6 py-14 md:py-20">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <Reveal direction="left">
               <div className="relative aspect-[3/4] w-full overflow-hidden rounded-lg">
@@ -281,8 +281,8 @@ export default function Home() {
         </section>
 
         {/* Platform */}
-        <section id="platform" className="bg-slate-50 dark:bg-slate-900 py-20">
-          <div className="max-w-6xl mx-auto px-6">
+        <section id="platform" className="bg-slate-50 dark:bg-slate-900 py-14 md:py-20">
+          <div className="max-w-6xl mx-auto px-4 md:px-6">
             <Reveal>
               <div className="text-center mb-16">
                 <h2 className="text-sm font-bold uppercase tracking-widest text-[color:var(--brand)]">
@@ -306,7 +306,7 @@ export default function Home() {
                 aria-hidden
               />
 
-              <div className="space-y-16 md:space-y-24">
+              <div className="space-y-12 md:space-y-24">
                 {voice.map((v, i) => {
                   const reverse = i % 2 === 1;
                   return (
@@ -325,17 +325,17 @@ export default function Home() {
                           <div className="voice-letter-inner relative">
                             {/* Colored aura behind glass */}
                             <div
-                              className={`absolute -inset-10 rounded-[3rem] bg-gradient-to-br ${v.gradient} blur-3xl opacity-70`}
+                              className={`absolute -inset-6 md:-inset-10 rounded-[3rem] bg-gradient-to-br ${v.gradient} blur-2xl md:blur-3xl opacity-60 md:opacity-70`}
                               aria-hidden
                             />
                             <div
-                              className={`absolute -inset-4 rounded-[2.5rem] bg-gradient-to-br ${v.gradient} blur-xl opacity-80`}
+                              className={`absolute -inset-2 md:-inset-4 rounded-[2.5rem] bg-gradient-to-br ${v.gradient} blur-lg md:blur-xl opacity-70 md:opacity-80`}
                               aria-hidden
                             />
 
                             {/* Glass tile */}
                             <div
-                              className="relative w-44 h-44 md:w-56 md:h-56 rounded-[2rem] overflow-hidden flex items-center justify-center rotate-[-3deg] transition-transform duration-500 hover:rotate-0 hover:scale-[1.03]"
+                              className="relative w-32 h-32 md:w-56 md:h-56 rounded-[1.5rem] md:rounded-[2rem] overflow-hidden flex items-center justify-center rotate-[-3deg] transition-transform duration-500 hover:rotate-0 hover:scale-[1.03]"
                               style={{
                                 background:
                                   "linear-gradient(135deg, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.1) 100%)",
@@ -364,7 +364,7 @@ export default function Home() {
                               />
 
                               <span
-                                className="relative text-8xl md:text-9xl font-black text-white select-none"
+                                className="relative text-6xl md:text-9xl font-black text-white select-none"
                                 style={{
                                   textShadow:
                                     "0 2px 10px rgba(0,0,0,0.25), 0 0 30px rgba(255,255,255,0.35), 0 1px 0 rgba(255,255,255,0.6)",
@@ -440,7 +440,7 @@ export default function Home() {
         </section>
 
         {/* Right Now */}
-        <section className="max-w-4xl mx-auto px-6 py-20">
+        <section className="max-w-4xl mx-auto px-4 md:px-6 py-14 md:py-20">
           <Reveal direction="scale">
             <div className="relative rounded-3xl p-8 md:p-10 bg-gradient-to-br from-slate-900 to-slate-800 text-white overflow-hidden border border-slate-700">
               <div className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-emerald-500/20 blur-3xl animate-blob" />
@@ -468,8 +468,8 @@ export default function Home() {
         </section>
 
         {/* Timeline */}
-        <section id="timeline" className="relative overflow-hidden bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-950 py-20">
-          <div className="max-w-5xl mx-auto px-6">
+        <section id="timeline" className="relative overflow-hidden bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-950 py-14 md:py-20">
+          <div className="max-w-5xl mx-auto px-4 md:px-6">
             <Reveal>
               <div className="text-center mb-16">
                 <h2 className="text-sm font-bold uppercase tracking-widest text-[color:var(--brand)]">
@@ -598,7 +598,7 @@ export default function Home() {
         </section>
 
         {/* Experience */}
-        <section id="experience" className="max-w-6xl mx-auto px-6 py-20">
+        <section id="experience" className="max-w-6xl mx-auto px-4 md:px-6 py-14 md:py-20">
           <Reveal>
             <div className="text-center mb-14">
               <h2 className="text-sm font-bold uppercase tracking-widest text-[color:var(--brand)]">
@@ -636,19 +636,19 @@ export default function Home() {
         {/* Get Involved / CTA */}
         <section
           id="get-involved"
-          className="relative overflow-hidden bg-gradient-to-br from-[#0b1e4d] via-[color:var(--brand)] to-[#3b1d6b] animate-gradient text-white py-24"
+          className="relative overflow-hidden bg-gradient-to-br from-[#0b1e4d] via-[color:var(--brand)] to-[#3b1d6b] animate-gradient text-white py-16 md:py-24"
         >
           <div className="absolute -top-20 -left-20 w-96 h-96 rounded-full bg-amber-400/10 blur-3xl animate-blob" />
           <div className="absolute -bottom-20 -right-20 w-96 h-96 rounded-full bg-blue-300/10 blur-3xl animate-blob animation-delay-2000" />
           <Reveal>
-            <div className="relative max-w-4xl mx-auto px-6 text-center">
+            <div className="relative max-w-4xl mx-auto px-4 md:px-6 text-center">
               <h2 className="text-sm font-bold uppercase tracking-widest text-amber-300">
                 Get Involved
               </h2>
-              <h3 className="text-4xl md:text-5xl font-bold mt-2 mb-6">
+              <h3 className="text-3xl md:text-5xl font-bold mt-2 mb-4 md:mb-6">
                 Join the Campaign
               </h3>
-              <p className="text-blue-100 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
+              <p className="text-blue-100 text-base md:text-xl max-w-2xl mx-auto mb-8 md:mb-10 leading-relaxed">
                 This election is decided by students — by <em>you</em>. Pledge
                 your vote today, follow along on Instagram, and help put a real
                 voice on the Howard County Board of Education.
@@ -661,13 +661,13 @@ export default function Home() {
         </section>
 
         {/* Footer */}
-        <footer className="bg-slate-900 text-slate-400 py-12">
-          <div className="max-w-6xl mx-auto px-6 flex flex-col items-center gap-6 text-sm">
+        <footer className="bg-slate-900 text-slate-400 py-8 md:py-12">
+          <div className="max-w-6xl mx-auto px-4 md:px-6 flex flex-col items-center gap-5 md:gap-6 text-sm">
             <a
               href="https://www.instagram.com/gavin4smob/"
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-fuchsia-600 via-pink-600 to-amber-500 text-white font-bold hover:scale-105 transition-transform shadow-lg"
+              className="clickable group flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-fuchsia-600 via-pink-600 to-amber-500 text-white font-bold hover:scale-105 transition-transform shadow-lg"
             >
               <svg
                 className="w-5 h-5 group-hover:rotate-12 transition-transform"

@@ -69,7 +69,7 @@ export function PledgeButton() {
       <button
         onClick={handlePledge}
         disabled={pledged}
-        className={`relative bg-amber-400 text-slate-900 px-8 py-4 rounded-full font-bold transition-all ${
+        className={`clickable relative bg-amber-400 text-slate-900 px-8 py-4 rounded-full font-bold transition-all ${
           pledged
             ? "opacity-80 cursor-default"
             : "hover:bg-amber-300 hover:scale-105 cursor-pointer"

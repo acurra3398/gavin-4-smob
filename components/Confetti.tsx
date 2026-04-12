@@ -1,28 +1,31 @@
 import type { CSSProperties } from "react";
 
 const COLORS = [
-  "#ffffff",
+  "#fff",
   "#fef3c7",
   "#fde68a",
   "#f59e0b",
-  "#1e3a8a",
   "#3b82f6",
   "#ec4899",
+  "#a855f7",
+  "#34d399",
 ];
 
-// Pre-computed so pieces are stable between server and client render.
-const PIECES = Array.from({ length: 28 }, (_, i) => {
-  const left = (i * 100) / 28 + ((i * 17) % 7) / 2;
-  const delay = -((i * 263) % 400) / 100;
-  const duration = 3.2 + ((i * 53) % 20) / 10;
+const PIECES = Array.from({ length: 24 }, (_, i) => {
+  const left = ((i * 100) / 24 + ((i * 13) % 6)).toFixed(1);
+  const delay = -(((i * 317) % 500) / 100);
+  const duration = 2.6 + ((i * 53) % 18) / 10;
   const color = COLORS[i % COLORS.length];
-  const drift = (((i * 29) % 24) - 12).toString();
-  const size = 4 + (i % 3);
-  return { left, delay, duration, color, drift, size };
+  const drift = ((i * 29) % 20) - 10;
+  const w = 5 + (i % 3);
+  const h = 3 + (i % 4);
+  const rotEnd = 360 + ((i * 47) % 540);
+  return { left, delay, duration, color, drift, w, h, rotEnd };
 });
 
 type ConfettiStyle = CSSProperties & {
   "--drift": string;
+  "--rot-end": string;
 };
 
 export function Confetti() {
@@ -37,9 +40,10 @@ export function Confetti() {
           animationDelay: `${p.delay}s`,
           animationDuration: `${p.duration}s`,
           background: p.color,
-          width: p.size,
-          height: p.size + 4,
+          width: p.w,
+          height: p.h,
           "--drift": `${p.drift}px`,
+          "--rot-end": `${p.rotEnd}deg`,
         };
         return <span key={i} className="confetti-piece" style={style} />;
       })}
