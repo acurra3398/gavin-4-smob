@@ -44,14 +44,17 @@ html.dark {
   /* Particles are pure decoration and a big perf hit on mobile — hide them */
   .particle { display: none !important; }
 
-  /* Reduce confetti count on mobile by hiding every other piece */
+  /* Hide heavy blobs in the intro overlay on mobile */
+  .intro-blob { display: none !important; }
+
+  /* Reduce confetti count on mobile */
   .confetti-piece:nth-child(2n) { display: none; }
 
-  /* Reduce backdrop-filter cost on mobile */
-  .voice-letter-inner div[style*="backdrop-filter"] {
-    backdrop-filter: blur(12px) saturate(140%) !important;
-    -webkit-backdrop-filter: blur(12px) saturate(140%) !important;
-  }
+  /* Fade-up animation shorter on mobile */
+  .animate-fade-up { animation-duration: 0.7s; }
+
+  /* Reveal transitions quicker on mobile to feel responsive */
+  .hover-lift { transition-duration: 0.2s; }
 }
 
 /* Clickable press-down feedback on tap/click */
