@@ -2,7 +2,7 @@ export function IntroOverlay() {
   return (
     <section
       aria-label="Intro"
-      className="hidden md:flex relative h-screen w-full items-center justify-center bg-gradient-to-br from-[#0b1e4d] via-[#1e3a8a] to-[#3b1d6b] overflow-hidden"
+      className="hidden md:flex relative h-screen w-full items-center justify-center bg-gradient-to-b from-[#0b1e4d] via-[#1e3a8a] to-[#6b21a8] overflow-hidden"
     >
       <div className="intro-blob absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full bg-amber-400/20 blur-3xl animate-blob" />
       <div className="intro-blob absolute -bottom-40 -right-40 w-[500px] h-[500px] rounded-full bg-blue-400/20 blur-3xl animate-blob animation-delay-2000" />
