@@ -9,6 +9,13 @@ type RevealProps = {
   direction?: "up" | "left" | "right" | "scale";
 };
 
+const initialTransform: Record<NonNullable<RevealProps["direction"]>, string> = {
+  up: "translateY(40px)",
+  left: "translateX(-40px)",
+  right: "translateX(40px)",
+  scale: "scale(0.92)",
+};
+
 export function Reveal({
   children,
   delay = 0,
@@ -16,30 +23,28 @@ export function Reveal({
   direction = "up",
 }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const [revealed, setRevealed] = useState(false);
+  const [visible, setVisible] = useState(false);
   const [centered, setCentered] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const io = new IntersectionObserver(
+    const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          // Double-rAF: let the initial opacity:0 state paint on iOS Safari
-          // before we swap in the animation class, otherwise Safari can
-          // skip the entrance animation entirely.
-          requestAnimationFrame(() =>
-            requestAnimationFrame(() => setRevealed(true)),
-          );
-          io.disconnect();
+          setVisible(true);
+          observer.disconnect();
         }
       },
-      { root: null, threshold: 0.05 },
+      { threshold: 0.15 }
     );
-    io.observe(el);
-    return () => io.disconnect();
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
 
+  // Second observer: when the element sits in the middle 40% of the viewport,
+  // add `.is-centered` so mobile can trigger hover-style animations (since
+  // there's no real hover on touch devices).
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -53,8 +58,6 @@ export function Reveal({
 
   const classes = [
     "reveal",
-    `reveal-${direction}`,
-    revealed ? "is-revealed" : "",
     centered ? "is-centered" : "",
     className,
   ]
@@ -65,7 +68,12 @@ export function Reveal({
     <div
       ref={ref}
       className={classes}
-      style={delay ? { animationDelay: `${delay}ms` } : undefined}
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "none" : initialTransform[direction],
+        transition: `opacity var(--reveal-duration, 0.9s) ease-out ${delay}ms, transform var(--reveal-duration, 0.9s) cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms`,
+        willChange: visible ? "auto" : "opacity, transform",
+      }}
     >
       {children}
     </div>
