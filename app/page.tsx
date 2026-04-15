@@ -1,6 +1,7 @@
 import { Nav } from "@/components/Nav";
 import { Placeholder } from "@/components/Placeholder";
 import { IntroOverlay } from "@/components/IntroOverlay";
+import { Marquee } from "@/components/Marquee";
 import { Reveal } from "@/components/Reveal";
 import { PledgeButton } from "@/components/PledgeButton";
 import { Confetti } from "@/components/Confetti";
@@ -425,10 +426,10 @@ export default function Home() {
         {/* Announcements marquee */}
         <section
           aria-label="Announcements"
-          className="bg-gradient-to-r from-[color:var(--brand)] via-[#6b21a8] to-[color:var(--brand)] text-white py-4 overflow-hidden border-y-4 border-amber-400"
+          className="bg-gradient-to-r from-[color:var(--brand)] via-[#6b21a8] to-[color:var(--brand)] text-white py-4 border-y-4 border-amber-400"
         >
-          <div className="flex whitespace-nowrap animate-marquee">
-            {[...announcements, ...announcements].map((a, i) => (
+          <Marquee speed={60}>
+            {announcements.map((a, i) => (
               <span
                 key={i}
                 className="mx-8 text-sm md:text-base font-semibold tracking-wide"
@@ -436,7 +437,7 @@ export default function Home() {
                 {a}
               </span>
             ))}
-          </div>
+          </Marquee>
         </section>
 
         {/* Right Now */}

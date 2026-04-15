@@ -34,7 +34,6 @@ html.dark {
   .animate-shimmer { animation-duration: 4.5s; }
   .animate-gradient { animation-duration: 16s; }
   .animate-bounce-slow { animation-duration: 3s; }
-  .animate-marquee { animation-duration: 60s; }
   .animate-pulse-glow { animation-duration: 3.5s; }
   .timeline-spine { animation-duration: 10s; }
   .animate-node-pop { animation-duration: 1s; }
@@ -87,21 +86,29 @@ html.dark {
 
   /* Mobile: when a Reveal is centered in the viewport, trigger the same
      look that a mouse-hover gives on desktop. */
-  [data-in-view="true"] .hover-lift,
-  .hover-lift[data-in-view="true"] {
-    transform: translate3d(0, -6px, 0);
-    box-shadow: 0 20px 40px -20px rgba(30, 58, 138, 0.3);
+  .reveal.is-centered .hover-lift,
+  .reveal.is-centered.hover-lift,
+  .is-centered .hover-lift {
+    transform: translate3d(0, -6px, 0) !important;
+    box-shadow: 0 20px 40px -20px rgba(30, 58, 138, 0.3) !important;
     transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-      box-shadow 0.5s;
+      box-shadow 0.5s !important;
   }
 
-  [data-in-view="true"] .voice-letter-inner {
-    animation: letter-wobble 0.8s ease-in-out;
+  .reveal.is-centered .voice-letter-inner {
+    animation: letter-wobble 0.9s ease-in-out !important;
   }
 
-  [data-in-view="true"] .tilt-on-hover {
-    transform: perspective(800px) rotateX(4deg) rotateY(-4deg) scale(1.02);
-    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  .reveal.is-centered .tilt-on-hover,
+  .is-centered .tilt-on-hover {
+    transform: perspective(800px) rotateX(4deg) rotateY(-4deg) scale(1.02) !important;
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) !important;
+  }
+
+  /* Scale the VOICE glass tile slightly when centered */
+  .reveal.is-centered .voice-letter-inner > div:first-of-type {
+    transform: rotate(0deg) scale(1.03) !important;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1) !important;
   }
 }
 
@@ -153,11 +160,48 @@ body {
 
 /* Fade up on mount */
 @keyframes fade-up {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translate3d(0, 30px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
 }
 .animate-fade-up {
   animation: fade-up 1.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Reveal on scroll — CSS animation (keyframes) is more reliable on iOS
+   Safari than transition-triggered state changes. */
+@keyframes reveal-up {
+  from { opacity: 0; transform: translate3d(0, 40px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@keyframes reveal-left {
+  from { opacity: 0; transform: translate3d(-40px, 0, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@keyframes reveal-right {
+  from { opacity: 0; transform: translate3d(40px, 0, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@keyframes reveal-scale {
+  from { opacity: 0; transform: translate3d(0, 0, 0) scale(0.92); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+.reveal {
+  opacity: 0;
+  will-change: transform, opacity;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+.reveal.is-revealed.reveal-up {
+  animation: reveal-up var(--reveal-duration, 0.9s) cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.reveal.is-revealed.reveal-left {
+  animation: reveal-left var(--reveal-duration, 0.9s) cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.reveal.is-revealed.reveal-right {
+  animation: reveal-right var(--reveal-duration, 0.9s) cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.reveal.is-revealed.reveal-scale {
+  animation: reveal-scale var(--reveal-duration, 0.9s) cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 /* Slow bounce */
@@ -207,19 +251,11 @@ body {
   animation: letter-wobble 0.6s ease-in-out;
 }
 
-/* Marquee for announcements */
-@keyframes marquee {
-  0% { transform: translate3d(0, 0, 0); }
-  100% { transform: translate3d(-50%, 0, 0); }
-}
+/* Marquee — animated by JS (MarqueeTrack component) for reliability on iOS */
 .animate-marquee {
-  animation: marquee 40s linear infinite;
-  /* iOS Safari needs these hints to not "snap back" the infinite loop */
-  will-change: transform;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  -webkit-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
+  will-change: transform;
 }
 
 /* Floating particles */
