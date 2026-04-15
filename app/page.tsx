@@ -425,7 +425,7 @@ export default function Home() {
         {/* Announcements marquee */}
         <section
           aria-label="Announcements"
-          className="bg-gradient-to-r from-[color:var(--brand)] via-purple-700 to-[color:var(--brand)] text-white py-4 overflow-hidden border-y-4 border-amber-400"
+          className="bg-gradient-to-r from-[color:var(--brand)] via-[#6b21a8] to-[color:var(--brand)] text-white py-4 overflow-hidden border-y-4 border-amber-400"
         >
           <div className="flex whitespace-nowrap animate-marquee">
             {[...announcements, ...announcements].map((a, i) => (
