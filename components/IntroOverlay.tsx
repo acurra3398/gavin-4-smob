@@ -29,9 +29,18 @@ export function IntroOverlay() {
   }, [mounted, isMobile, dismissed]);
 
   // When the banner unmounts, the document shrinks by 100vh. Snap scroll to 0
-  // so the user lands cleanly at the top of the real content.
+  // instantly — `html { scroll-behavior: smooth }` would otherwise animate
+  // the reset and make the main content look like it swoops up from below.
   useLayoutEffect(() => {
-    if (dismissed) window.scrollTo(0, 0);
+    if (!dismissed) return;
+    const html = document.documentElement;
+    const prev = html.style.scrollBehavior;
+    html.style.scrollBehavior = "auto";
+    window.scrollTo(0, 0);
+    // Restore on next frame so user-triggered smooth scrolls still work.
+    requestAnimationFrame(() => {
+      html.style.scrollBehavior = prev;
+    });
   }, [dismissed]);
 
   if (!mounted || isMobile || dismissed) return null;
