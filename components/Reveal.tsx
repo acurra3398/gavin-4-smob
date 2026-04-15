@@ -25,11 +25,16 @@ export function Reveal({
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setRevealed(true);
+          // Double-rAF: let the initial opacity:0 state paint on iOS Safari
+          // before we swap in the animation class, otherwise Safari can
+          // skip the entrance animation entirely.
+          requestAnimationFrame(() =>
+            requestAnimationFrame(() => setRevealed(true)),
+          );
           io.disconnect();
         }
       },
-      { threshold: 0.1 },
+      { root: null, threshold: 0.05 },
     );
     io.observe(el);
     return () => io.disconnect();
@@ -40,7 +45,7 @@ export function Reveal({
     if (!el) return;
     const io = new IntersectionObserver(
       ([entry]) => setCentered(entry.isIntersecting),
-      { rootMargin: "-30% 0px -30% 0px", threshold: 0 },
+      { root: null, rootMargin: "-30% 0px -30% 0px", threshold: 0 },
     );
     io.observe(el);
     return () => io.disconnect();

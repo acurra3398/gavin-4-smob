@@ -1,4 +1,24 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 export function IntroOverlay() {
+  const [dismissed, setDismissed] = useState(false);
+
+  useEffect(() => {
+    if (dismissed) return;
+    const onScroll = () => {
+      if (window.scrollY >= window.innerHeight) {
+        setDismissed(true);
+      }
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [dismissed]);
+
+  if (dismissed) return null;
+
   return (
     <section
       aria-label="Intro"
