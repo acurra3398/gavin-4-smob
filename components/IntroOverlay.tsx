@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export function IntroOverlay() {
   const [isMobile, setIsMobile] = useState(false);
@@ -28,20 +28,8 @@ export function IntroOverlay() {
     return () => window.removeEventListener("scroll", onScroll);
   }, [mounted, isMobile, dismissed]);
 
-  // When the banner unmounts, the document shrinks by 100vh. Snap scroll to 0
-  // instantly — `html { scroll-behavior: smooth }` would otherwise animate
-  // the reset and make the main content look like it swoops up from below.
-  useLayoutEffect(() => {
-    if (!dismissed) return;
-    const html = document.documentElement;
-    const prev = html.style.scrollBehavior;
-    html.style.scrollBehavior = "auto";
-    window.scrollTo(0, 0);
-    // Restore on next frame so user-triggered smooth scrolls still work.
-    requestAnimationFrame(() => {
-      html.style.scrollBehavior = prev;
-    });
-  }, [dismissed]);
+  // No scroll reset on dismiss — browser scroll anchoring keeps the user's
+  // visual position as the 100vh intro section is removed from the doc.
 
   if (!mounted || isMobile || dismissed) return null;
 
