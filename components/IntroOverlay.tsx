@@ -5,9 +5,17 @@ import { useCallback, useEffect, useRef, useState } from "react";
 export function IntroOverlay() {
   const [progress, setProgress] = useState(0);
   const [dismissed, setDismissed] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [checked, setChecked] = useState(false);
   const offsetRef = useRef(0);
   const touchYRef = useRef<number | null>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    setIsMobile(mq.matches);
+    setChecked(true);
+  }, []);
 
   const advance = useCallback(
     (delta: number) => {
@@ -21,7 +29,7 @@ export function IntroOverlay() {
   );
 
   useEffect(() => {
-    if (dismissed) return;
+    if (dismissed || !checked || isMobile) return;
 
     const prevBodyOverflow = document.body.style.overflow;
     const prevHtmlOverflow = document.documentElement.style.overflow;
@@ -74,9 +82,9 @@ export function IntroOverlay() {
       document.body.style.overflow = prevBodyOverflow;
       document.documentElement.style.overflow = prevHtmlOverflow;
     };
-  }, [dismissed, advance]);
+  }, [dismissed, advance, checked, isMobile]);
 
-  if (dismissed) return null;
+  if (dismissed || !checked || isMobile) return null;
 
   return (
     <div

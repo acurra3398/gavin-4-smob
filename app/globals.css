@@ -55,6 +55,35 @@ html.dark {
 
   /* Reveal transitions quicker on mobile to feel responsive */
   .hover-lift { transition-duration: 0.2s; }
+
+  /* Safari mobile: disable filter animation on blobs — iOS jank */
+  .animate-blob {
+    animation: none !important;
+    filter: blur(24px) !important;
+  }
+
+  /* Safari mobile: disable shimmer background-position animation — flickers */
+  .animate-shimmer {
+    animation: none !important;
+    background-position: 50% 50% !important;
+  }
+
+  /* Safari mobile: simpler gradient drift */
+  .animate-gradient {
+    animation: none !important;
+  }
+
+  /* Disable pulse-glow box-shadow animation on mobile — repaint heavy */
+  .animate-pulse-glow { animation: none !important; }
+
+  /* Disable spine flow animation on mobile */
+  .timeline-spine { animation: none !important; }
+
+  /* Disable hover-lift transform on mobile (no hover) */
+  .hover-lift:hover {
+    transform: none;
+    box-shadow: none;
+  }
 }
 
 /* Clickable press-down feedback on tap/click */
@@ -259,5 +288,16 @@ body {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* Safari-only fixes: gradient-text shimmer flickers, backdrop-filter on
+   transforming parents repaints. Scoped via @supports hack that targets
+   WebKit only (Chrome ignores -webkit-touch-callout as a non-standard). */
+@supports (-webkit-touch-callout: none) {
+  /* Stop shimmer on gradient-clipped text — this flickers in Safari */
+  .animate-shimmer {
+    animation: none !important;
+    background-position: 50% 50% !important;
   }
 }
