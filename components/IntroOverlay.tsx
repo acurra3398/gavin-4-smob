@@ -1,109 +1,15 @@
-"use client";
-
-import { useCallback, useEffect, useRef, useState } from "react";
-
 export function IntroOverlay() {
-  const [progress, setProgress] = useState(0);
-  const [dismissed, setDismissed] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-  const [mounted, setMounted] = useState(false);
-  const offsetRef = useRef(0);
-  const touchYRef = useRef<number | null>(null);
-  const overlayRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(max-width: 767px)");
-    setIsMobile(mq.matches);
-    setMounted(true);
-  }, []);
-
-  const advance = useCallback((delta: number) => {
-    const next = Math.max(0, offsetRef.current + delta);
-    offsetRef.current = next;
-    const p = Math.min(1, next / window.innerHeight);
-    setProgress(p);
-    if (p >= 1) setDismissed(true);
-  }, []);
-
-  useEffect(() => {
-    if (!mounted || isMobile || dismissed) return;
-
-    const prevBodyOverflow = document.body.style.overflow;
-    const prevHtmlOverflow = document.documentElement.style.overflow;
-    document.body.style.overflow = "hidden";
-    document.documentElement.style.overflow = "hidden";
-    window.scrollTo(0, 0);
-
-    const el = overlayRef.current;
-
-    const onWheel = (e: WheelEvent) => {
-      e.preventDefault();
-      advance(e.deltaY);
-    };
-
-    const onTouchStart = (e: TouchEvent) => {
-      touchYRef.current = e.touches[0]?.clientY ?? null;
-    };
-
-    const onTouchMove = (e: TouchEvent) => {
-      if (touchYRef.current == null) return;
-      const y = e.touches[0]?.clientY ?? touchYRef.current;
-      const delta = (touchYRef.current - y) * 2;
-      touchYRef.current = y;
-      advance(delta);
-    };
-
-    const onKey = (e: KeyboardEvent) => {
-      if (
-        e.key === "ArrowDown" ||
-        e.key === "PageDown" ||
-        e.key === " " ||
-        e.key === "Enter"
-      ) {
-        e.preventDefault();
-        advance(window.innerHeight);
-      }
-    };
-
-    el?.addEventListener("wheel", onWheel, { passive: false });
-    el?.addEventListener("touchstart", onTouchStart, { passive: true });
-    el?.addEventListener("touchmove", onTouchMove, { passive: false });
-    window.addEventListener("keydown", onKey);
-
-    return () => {
-      el?.removeEventListener("wheel", onWheel);
-      el?.removeEventListener("touchstart", onTouchStart);
-      el?.removeEventListener("touchmove", onTouchMove);
-      window.removeEventListener("keydown", onKey);
-      document.body.style.overflow = prevBodyOverflow;
-      document.documentElement.style.overflow = prevHtmlOverflow;
-    };
-  }, [mounted, isMobile, dismissed, advance]);
-
-  if (!mounted || isMobile || dismissed) return null;
-
   return (
-    <div
-      ref={overlayRef}
-      aria-hidden={progress >= 1}
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-gradient-to-br from-[#0b1e4d] via-[#1e3a8a] to-[#3b1d6b] overflow-hidden"
-      style={{
-        touchAction: "none",
-        transform: `translate3d(0, ${-progress * 100}vh, 0)`,
-        opacity: 1 - progress * 0.5,
-        willChange: "transform, opacity",
-      }}
-      onClick={() => advance(window.innerHeight)}
+    <section
+      aria-label="Intro"
+      className="hidden md:flex relative h-screen w-full items-center justify-center bg-gradient-to-b from-[#0b1e4d] via-[#1e3a8a] to-[#6b21a8] overflow-hidden"
     >
       <div className="intro-blob absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full bg-amber-400/20 blur-3xl animate-blob" />
       <div className="intro-blob absolute -bottom-40 -right-40 w-[500px] h-[500px] rounded-full bg-blue-400/20 blur-3xl animate-blob animation-delay-2000" />
       <div className="intro-blob absolute top-1/2 left-1/2 w-[400px] h-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-purple-500/20 blur-3xl animate-blob animation-delay-4000" />
 
-      <div
-        className="relative text-center px-6"
-        style={{ transform: `scale(${1 - progress * 0.08})` }}
-      >
-        <h1 className="text-4xl md:text-8xl font-black tracking-tight text-white animate-fade-up">
+      <div className="relative text-center px-6">
+        <h1 className="text-5xl md:text-8xl font-black tracking-tight text-white animate-fade-up">
           Your voice
           <span className="mt-1 block">
             <span className="relative inline-block">
@@ -117,10 +23,10 @@ export function IntroOverlay() {
             </span>
           </span>
         </h1>
-        <p className="mt-6 md:mt-8 text-white/70 text-xs md:text-sm uppercase tracking-[0.3em] animate-fade-up animation-delay-500">
+        <p className="mt-8 text-white/70 text-sm uppercase tracking-[0.3em] animate-fade-up animation-delay-500">
           Scroll to continue
         </p>
-        <div className="mt-4 md:mt-6 flex justify-center animate-bounce-slow">
+        <div className="mt-6 flex justify-center animate-bounce-slow">
           <svg
             className="w-6 h-6 text-white/70"
             fill="none"
@@ -136,6 +42,6 @@ export function IntroOverlay() {
           </svg>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
