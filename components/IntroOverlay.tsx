@@ -6,7 +6,6 @@ export function IntroOverlay() {
   const [isMobile, setIsMobile] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [dismissed, setDismissed] = useState(false);
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 767px)");
@@ -15,31 +14,24 @@ export function IntroOverlay() {
   }, []);
 
   useEffect(() => {
-    if (!mounted || isMobile || dismissed) return;
+    if (!mounted || isMobile) return;
     const onScroll = () => {
       const h = window.innerHeight;
       const p = Math.min(1, Math.max(0, window.scrollY / h));
       setProgress(p);
-      // Once fully past the banner, unmount it so the user can't scroll back.
-      if (window.scrollY >= h) setDismissed(true);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, [mounted, isMobile, dismissed]);
+  }, [mounted, isMobile]);
 
-  // No scroll reset on dismiss — browser scroll anchoring keeps the user's
-  // visual position as the 100vh intro section is removed from the doc.
-
-  if (!mounted || isMobile || dismissed) return null;
+  if (!mounted || isMobile) return null;
 
   const opacity = Math.max(0, 1 - progress * 1.3);
   const scale = 1 - progress * 0.08;
 
   return (
     <section className="relative h-screen" aria-label="Intro">
-      {/* Sticky inner — stays pinned during the 100vh scroll room, then
-          scrolls away naturally. No fixed positioning = no wheel event issues. */}
       <div className="sticky top-0 h-screen w-full flex items-center justify-center bg-gradient-to-br from-[#0b1e4d] via-[#1e3a8a] to-[#3b1d6b] overflow-hidden">
         <div className="intro-blob absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full bg-amber-400/20 blur-3xl animate-blob" />
         <div className="intro-blob absolute -bottom-40 -right-40 w-[500px] h-[500px] rounded-full bg-blue-400/20 blur-3xl animate-blob animation-delay-2000" />
