@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 
 export function IntroOverlay() {
   const [dismissed, setDismissed] = useState(false);
@@ -15,6 +15,20 @@ export function IntroOverlay() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, [dismissed]);
+
+  // After unmount: instantly snap to the top of main content (scrollY=0).
+  // Overriding scroll-behavior kills the smooth-scroll swoop that would
+  // otherwise animate the page from wherever momentum carried the user.
+  useLayoutEffect(() => {
+    if (!dismissed) return;
+    const html = document.documentElement;
+    const prev = html.style.scrollBehavior;
+    html.style.scrollBehavior = "auto";
+    window.scrollTo(0, 0);
+    requestAnimationFrame(() => {
+      html.style.scrollBehavior = prev;
+    });
   }, [dismissed]);
 
   if (dismissed) return null;
