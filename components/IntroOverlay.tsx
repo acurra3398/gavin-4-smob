@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 
 export function IntroOverlay() {
   const [isMobile, setIsMobile] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [dismissed, setDismissed] = useState(false);
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 767px)");
@@ -14,18 +15,26 @@ export function IntroOverlay() {
   }, []);
 
   useEffect(() => {
-    if (!mounted || isMobile) return;
+    if (!mounted || isMobile || dismissed) return;
     const onScroll = () => {
       const h = window.innerHeight;
       const p = Math.min(1, Math.max(0, window.scrollY / h));
       setProgress(p);
+      // Once fully past the banner, unmount it so the user can't scroll back.
+      if (window.scrollY >= h) setDismissed(true);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, [mounted, isMobile]);
+  }, [mounted, isMobile, dismissed]);
 
-  if (!mounted || isMobile) return null;
+  // When the banner unmounts, the document shrinks by 100vh. Snap scroll to 0
+  // so the user lands cleanly at the top of the real content.
+  useLayoutEffect(() => {
+    if (dismissed) window.scrollTo(0, 0);
+  }, [dismissed]);
+
+  if (!mounted || isMobile || dismissed) return null;
 
   const opacity = Math.max(0, 1 - progress * 1.3);
   const scale = 1 - progress * 0.08;
