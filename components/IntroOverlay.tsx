@@ -29,9 +29,21 @@ export function IntroOverlay() {
   }, [mounted, isMobile, dismissed]);
 
   // When the banner unmounts, the document shrinks by 100vh. Snap scroll to 0
-  // so the user lands cleanly at the top of the real content.
+  // so the user lands cleanly at the top of the real content. Override
+  // scroll-behavior: smooth (set globally) so this is an instant jump, not
+  // a swoop animation from wherever momentum carried the user.
   useLayoutEffect(() => {
-    if (dismissed) window.scrollTo(0, 0);
+    if (!dismissed) return;
+    const html = document.documentElement;
+    const prev = html.style.scrollBehavior;
+    html.style.scrollBehavior = "auto";
+    window.scrollTo(0, 0);
+    // Restore after two frames to ensure the jump has committed.
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        html.style.scrollBehavior = prev;
+      });
+    });
   }, [dismissed]);
 
   if (!mounted || isMobile || dismissed) return null;
