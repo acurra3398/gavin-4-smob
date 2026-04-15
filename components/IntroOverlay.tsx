@@ -1,4 +1,36 @@
+"use client";
+
+import { useEffect, useLayoutEffect, useState } from "react";
+
 export function IntroOverlay() {
+  const [dismissed, setDismissed] = useState(false);
+
+  useEffect(() => {
+    if (dismissed) return;
+    const onScroll = () => {
+      if (window.scrollY >= window.innerHeight) setDismissed(true);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [dismissed]);
+
+  // After dismiss the 100vh section is gone — snap to top of hero instantly
+  // (overriding the global scroll-behavior:smooth) so we don't get a swoop
+  // animation, and we don't land deep inside the About section.
+  useLayoutEffect(() => {
+    if (!dismissed) return;
+    const html = document.documentElement;
+    const prev = html.style.scrollBehavior;
+    html.style.scrollBehavior = "auto";
+    window.scrollTo(0, 0);
+    requestAnimationFrame(() => {
+      html.style.scrollBehavior = prev;
+    });
+  }, [dismissed]);
+
+  if (dismissed) return null;
+
   return (
     <section
       aria-label="Intro"
